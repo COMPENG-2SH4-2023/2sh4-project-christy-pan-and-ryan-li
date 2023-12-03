@@ -131,7 +131,7 @@ void Player::movePlayer()
     {
         playerPosList->removeTail();
     }
-    for(int i = 1; i < playerPosList->getSize(); i++)   //Check with every element of the body apart from head.
+    for(int i = 1; i <= playerPosList->getSize(); i++)   //Check with every element of the body apart from head.
     {
         playerPosList->getElement(body, i);
         if(currHead.x == body.x && currHead.y == body.y)//Body collision check
