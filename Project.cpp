@@ -17,6 +17,7 @@ char input;
 int rows;
 int cols;
 int score;
+bool loseStatus;
 char dispString[21];
 
 objPos *itemBin;
@@ -133,6 +134,7 @@ void DrawScreen(void)
     MacUILib_printf("Score <%d>\n", myGM->getScore());
     MacUILib_printf("Food <%d,%d>", tempFoodPos.x, tempFoodPos.y);
     score = myGM->getScore(); //store for game over screen
+    loseStatus = myGM->getLoseFlag();
 }
 
 void LoopDelay(void)
@@ -143,14 +145,17 @@ void LoopDelay(void)
 
 void CleanUp(void)
 {
-    MacUILib_clearScreen();    
+    MacUILib_clearScreen();
+    //Use to check game winning condition since it will be deleted in myGM
+    int x = myGM->getBoardSizeX();
+    int y = myGM->getBoardSizeY();    
     delete myGM;
     delete player;
-    if(myGM->getLoseFlag() == true) //Lose condition
+    if(loseStatus == true) //Lose condition
     {
         MacUILib_printf("You lose. You scored: %d", score);
     }
-    else    //Win condition
+    else if(((x-2)*(y-2)-1)==score)    //Win condition
     {
         MacUILib_printf("You beat the game!");
     }
