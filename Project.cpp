@@ -153,7 +153,7 @@ void CleanUp(void)
     delete player;
     if(loseStatus == true) //Lose condition
     {
-        MacUILib_printf("You lose. You scored: %d", score);
+        MacUILib_printf("Game Over. Your score is: %d", score);
     }
     else if(((x-2)*(y-2)-1)==score)    //Win condition
     {
